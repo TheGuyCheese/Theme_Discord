@@ -1,0 +1,892 @@
+// * T1.server-view v0.1.64
+// Channels, Panels / Members / Server discovery
+
+// -> Text/Voice channels
+.container-1NXEtd {
+  top: 48px ;
+  margin-bottom: 48px ;
+
+  // Special channels seperator (only show last one)
+  .sectionDivider-189lqb:has(~ .sectionDivider-189lqb) { display: none }
+
+  // -> Current server event, Feature promotion
+  .channelNotice-K4UfZY, .channelNotice-7cg_jN {
+    
+    // Event name
+    .colorHeaderPrimary-jN_yGr {
+      color: var(--header-secondary);
+    }
+    
+    // .joinButton-1HdI2a {
+    .button-f2h6uQ {
+      @include Btn("background");
+    }
+  }
+  // <- Current server event, Feature promotion
+  
+  // -> Scroller container
+  .scroller-1ox3I2 {
+    // Fade out effect
+    @include scrollerFadeOut();
+
+    &::-webkit-scrollbar { display: none }
+  }
+  // <- Scroller container
+  
+  // -> Server boost progress bar
+  .container-2giAcK {
+    position: relative ;
+    height: calc(24px * var(--show-serverboost-stats, 1));
+    margin: -8px 4px 8px 4px ;
+    padding: 0 ;
+    overflow: hidden ;
+
+    &::after { display: none }
+    
+    // Text container
+    .textArea-7J7xQx {
+      margin: 0 12px ;
+      
+      // Nitro flower icon thing
+      .flowerStarContainer-1QeD-L { display: none }
+      
+      // Text "Goal:LVL"
+      .colorInteractiveActive-30E9n8 {
+        color: var(--header-secondary);
+      }
+    }
+    
+    // Container progress bar
+    .progressBarContainer-1efroK {
+      position: absolute ;
+      top: 0px ;
+      width: 100% ;
+      margin: 0 ;
+      background: none ;
+      visibility: hidden ;
+    
+      // Progress bar
+      .progressBar-2yl2pi {
+        height: 24px ;
+        opacity: .15 ;
+        border-top-right-radius: 5px ;
+        border-bottom-right-radius: 5px ;
+      }
+    
+      // End of bar icon 
+      .tadaIcon-313rPm { display: none }
+    }
+    
+    &:hover .progressBarContainer-1efroK {
+      visibility: visible ;
+    }
+    
+    // Bottom spacer
+    .divider-3qUeLQ { display: none }
+    
+    // Channel category header if adjacent
+    + .containerDefault-3TQ5YN {
+      padding-top: 8px ;
+    }
+  }
+  // <- Server boost progress bar
+  
+  // Category names
+  .containerDefault-3TQ5YN .name-3BUDLf {
+    font-weight: 700 ;
+  }
+  
+  // Text and Voice Channels
+  .wrapper-NhbLHG {
+
+    // Mentions badge
+    @include Mentions_icon(".numberBadge-37OJ3S");
+
+    // Icon ("#", speaker, ..)
+    .icon-2W8DHg {
+      width: 15px ;
+      height: 15px ;
+      margin: 2.5px 0 ;
+      color: var(--channels-default);
+      opacity: .8 ;
+    }
+    
+    // Channel name
+    .name-28HaxV { 
+      color: var(--channels-default);
+    }
+    
+    // -> Channel options and infos
+    // Settings and invite buttons
+    .iconItem-1EjiK0 { display: none }
+
+    // Channel badges (e.g. "NEW", ..)
+    .textBadge-1fdDPJ {
+      background: none !important;
+      color: var(--interactive-hover)
+    }
+    
+    // Connection limit (voice)
+    .wrapper-2fEmwW {
+      
+      span { background: transparent }
+      
+      .total-1c5KCN::after {
+        content: "|" ;
+        top: 0px ;
+        left: -5px ;
+        border: none ;
+      }
+    }
+    
+    // container for hover
+    .link-1_kTxV {
+      background: transparent;
+      
+      &:hover {
+        .name-28HaxV { color: var(--interactive-hover) }
+        .iconItem-1EjiK0 { display: block }
+      }
+    }
+    // <- Channel options and infos
+    
+    // Channel selected / connected
+    &.modeSelected-3DmyhH, &.modeConnected-NrO4cP {
+
+      // Channel name
+      .name-28HaxV { 
+        color: var(--interactive-active) !important; 
+      }
+      // Channel icon (left)
+      .icon-2W8DHg { 
+        color: var(--interactive-active) !important;
+      }
+    }
+    
+    // Channel muted
+    &.modeMuted-2T4MDZ {
+      // Channel icon (left)
+      .icon-2W8DHg { 
+        color: var(--interactive-muted);
+      }
+    }
+    
+    // Channel unread
+    &.modeUnread-3Cxepe {
+      // pill
+      .unread-36eUEm { 
+        background-color: var(--interactive-hover);
+      }
+    }
+
+    // Channel no permission
+    &.modeLocked-3sToxd {
+
+      .link-1_kTxV {
+        cursor: not-allowed ;
+      }
+
+      .name-28HaxV {
+        color: var(--interactive-muted);
+      }
+    }
+  }
+
+  // Channel indicator bar (floating)
+  .container-24rGVp .bar-wDIGjg {
+    background: var(--background-secondary-alt);
+
+    @include shadow_effect("box_3");
+
+    &:hover {
+      background: var(--background-tertiary);
+    }
+
+    // Unread mentions bar
+    &.mentionsBar-DpLHCy .barText-1eIsLx {
+      color: var(--red-secondary) !important;
+    }
+  }
+  
+  // Threads indicator spine thing
+  .spine-29OFwR {
+    color: var(--channels-default);
+    opacity: .5 ;
+  }
+  
+  // User in Voice channel
+  .voiceUser-3nRK-K {
+
+    // "live" indicator
+    .live-1V2D-f { 
+      background: none !important ;
+      color: var(--red) ;
+    }
+  }
+  
+  // New in-server feature notification
+  .wrapper-Hd8H2G .container-JMJRDf {
+    background: var(--background-tertiary) ;
+    
+    .button-f2h6uQ {
+      @include Btn("background");
+    }
+  }
+
+  // "Hide/Show all voice Channels
+  .voiceChannelsButton-SRmgo8:hover {
+    background-color: var(--background-modifier-hover);
+    border-color: transparent ;
+  }
+}
+// <- Text/Voice channels
+
+// -> Sidebar Panels (Profile, Activity,..)
+.sidebar-1tnWFu .panels-3wFtMD {
+  
+  // Profile Container
+  .container-YkUktl {
+    position: absolute ;
+    height: 48px ;
+    width: 240px ;
+    top: 0 ;
+    box-sizing: border-box ;
+
+    // Pfp, name container
+    .avatarWrapper-1B9FTW {
+      margin: 6px 8px 6px 0 ;
+      background: none ;
+    }
+
+    // Buttons
+    .button-12Fmur {
+      background: none ;
+    }
+  }
+  
+  // Activity Container
+  .activityPanel-9icbyU {
+    height: 32px ;
+    padding: 6px 10px ;
+    
+    // Image
+    .gameIconWrapper-zXQ03M { 
+      height: 32px;
+    }
+    
+    // Text
+    .title-3XlmeX { 
+      line-height: 32px;
+    }
+    
+    button { background: none }
+  }
+  
+  // Voice Connection
+  .container-1zzFcN {
+    display: grid ;
+    padding: 0 ;
+    border: none ;
+    grid-template-columns: 100% ;
+    contain: paint ;
+    
+    // Voice channel info container
+    .connection-3k9QeF {
+      order: 2 ;
+      margin-left: 32px ;
+      padding: 6px 0 ;
+      align-items: unset ;
+      
+      // Ping / "Connected"
+      .rtcConnectionStatus-c5A6Av {
+        padding: 1px 0 2px 0 ;
+      }
+      
+      // Buttons container
+      .button-12Fmur {
+        background: none ;
+        
+        // Noise Suppression Btn
+        &:first-child { display: none }
+      }
+    }
+    
+    // Connected users container
+    .voiceUsers-3gPcwY {
+      height: 30px ;
+      padding: 3px 8px ;
+      margin: 0 ;
+      box-sizing: border-box ;
+      order: 3 ;
+      
+      &::-webkit-scrollbar { display: none }
+      
+      ~ .actionButtons-2vEOUh:after {
+        bottom: 42px ;
+      }
+    }
+    
+    // Voice channel button container
+    .actionButtons-2vEOUh {
+      display: inline-flex ;
+      height: 0 ;
+      padding: 0 ;
+      justify-content: space-evenly ;
+      overflow: hidden ;
+      transition: .1s linear;
+      align-items: center ;
+      
+      // Caret icon
+      &:after {
+        content: "<" ;
+        position: absolute ;
+        display: flex ;
+        width: 200px;
+        height: 32px ;
+        left: 0 ;
+        bottom: 12px ;
+        justify-content: center ;
+        align-items: center ;
+        color: var(--interactive-normal);
+        font-size: 18px ;
+        font-weight: 700 ;
+        transform: rotate(90deg) translate(6px, 100px - 16px);
+      }
+      
+      &:hover {
+        height: 44px ;
+        
+        &:after {
+          content: ">" ;
+          color: var(--interactive-hover);
+        }
+      }
+      
+      // Buttons container
+      .button-1EGGcP {
+        width: max-content ;
+        padding: 0 12px ;
+        background: none ;
+        color: var(--interactive-normal);
+        z-index: 1 ;
+        
+        &:not(.fauxDisabled-8w0hCZ):hover {
+          color: var(--interactive-hover);
+        }
+      }
+    }
+  }
+}
+// <- Sidebar Panels (Profile, Activity,..)
+
+// -> Members list 
+.members-3WRCEx {
+  @include scrollerFadeOut();
+
+  &::-webkit-scrollbar { display: none }
+  
+  // Role header
+  .membersGroup-2eiWxl { 
+    margin-bottom: 4px;
+    font-weight: 600 ;
+   }
+  
+  // Member
+  .member-2gU6Ar {
+    margin: 0 0 0 11px ;
+    background: none ;
+    
+    // Inner container 
+    .layout-1qmrhw {
+      border-radius: 0 ;
+      background: none ;
+      border-right: 3px solid transparent ;
+      
+      &:hover { 
+        border-color: var(--interactive-hover) ;
+        background-color: var(--background-modifier-hover) ;
+      }
+    }
+    
+    // User popout open
+    &.selected-1-Z6gm .layout-1qmrhw {
+       border-right: 3px solid var(--interactive-hover);
+    }
+    
+    // Offline member
+    &.offline-22aM7E:not(:hover) .avatar-31d8He{
+      filter: grayscale(100%);
+      border-radius: 50% ;
+    }
+    
+    // Nitro icon 
+    .name-3Vmqxm + div { pointer-events: none }
+    
+    .ownerIcon-255uKo {
+      color: var(--header-secondary);
+    }
+  }
+
+  // Preload dummys
+  .placeholder-38d3Iv, .memberGroupsPlaceholder-9tqX9V {
+    animation: none ;
+  }
+  .placeholderAvatar-1qAcRZ, .placeholderUsername-3iQi_D, .memberGroupsPlaceholder-9tqX9V {
+    background: var(--text-normal);
+    opacity: 0.1;
+  }
+  
+  // Empty members list (Threads)
+  > div {
+    background: none ;
+  }
+}
+// <- Members list 
+
+// -> Discovery
+.discoverHeader-1vsvZ0 {
+  
+  // Sidebar
+  ~ .categoryItem-Kc_HK_ .itemInner-3e_4G4 {
+    border-radius: 0 ;
+    padding: 0 4px ;
+    margin: 5px 4px ;
+  }
+  
+  ~ .categoryItem-Kc_HK_ {
+    
+    .itemInner-3e_4G4 {
+      border-radius: 0 ;
+      padding: 0 4px ;
+      margin: 5px 4px ;
+    }
+    
+    &:hover .itemInner-3e_4G4 { border-left: 3px solid var(--interactive-hover) }
+    
+    &.selected-1-Z6gm .itemInner-3e_4G4 {
+      background-color: transparent ;
+      border-left: 3px solid var(--interactive-hover) ;
+    }
+  }
+}
+
+// Content
+.sidebar-1tnWFu ~ .pageWrapper-2PwDoS > .scroller-3j5xK2 { @include scrollbar() }
+// <- Discovery
+
+// -> Server boost screen
+.root-2zfUH6.enterDone-menWZ8 {
+  margin-top: 22px ;
+
+  .scroller-3u_s5m { 
+    @include scrollbar();
+    @include scrollerFadeOut();
+  }
+
+  // weird wave design things
+  .bodyWave-wQyWfY, .headerWave-3sTT0Z { display: none }
+}
+// <- Server boost screen
+
+// -> Home channel/ Server guide
+.homeContainer-1T8N7y, .emptyHomeContainer-1pW-ln {
+
+  // -> Header
+  .header-20qCMo {
+
+    .headerIcon-3Q7cOC {
+      border: none ;
+      border-radius: 7.5% ;
+
+      &:not([class*=".gif"]) { @include shadow_effect("drop_1") }
+    }
+
+    // Invite Btn
+    .inviteButton-17ob8h {
+      background: var(--background-modifier-hover);
+      transition: none ;
+
+      &:hover {
+        background: var(--background-modifier-selected);
+      }
+    }
+  }
+  // <- Header
+
+  // -> Body
+  // Greetings text
+  .welcomeMessageContainer-35bQR5 {
+
+    .userCardOuter-1au0HV, .userCardInner-3c42YR {
+      background: none ;
+    }
+  }
+
+  // "Get Started", "Resources" section items
+  .action-3oG-si, .row--LCpto {
+    background: var(--background-modifier-hover);
+    transition: none ;
+
+    &:hover {
+      background: var(--background-modifier-selected);
+    }
+  }
+
+  // Sidebar (server info)
+  .sidebarCardWrapper-34oCuK {
+    background: var(--background-modifier-hover);
+  }
+  // <- Body
+}
+
+// OLD
+// .homeContainer-r4Hvv1 {
+ 
+//   // Info Top
+//   .widgets-37sQdc {
+
+//     // inner container
+//     .container-2Hi7Km {
+//       background: none ;
+//     }
+
+//     // Widgets
+//     .container-xwOzwi, .emptyStateContainer-xWOMPJ {
+//       background: none ;
+//     }
+
+//     // Channels
+//     .container-3HMTms {
+//       background: var(--background-modifier-hover) ;
+//       border: none ;
+
+//       &:hover {
+//         background: var(--background-modifier-selected) ;
+//       }
+//     }
+//   }
+
+//   // Top message container
+//   .container-4HqGB3 {
+//     background: none ;
+//   }
+
+//   .card-3x20HF {
+//     background: var(--background-modifier-hover) ;
+//     border: none ;
+
+//     &:hover {
+//       background: var(--background-modifier-selected) ;
+//     }
+
+//     // load Dummys 
+//     .wrapper-15CKyy {
+//       background: none ;
+//     }
+//   }
+// }
+// <- Home channel/ Server guide
+
+
+// -> Special Channels
+// Header
+.container-ZMc96U {
+
+  // return to last channel btn (Chan&Rols / Members)
+  .returnButton-1xn3Ii, .returnButton-1ptceW {
+    border: none;
+    background: none;
+
+    // Btn text
+    .returnButtonText-27U_ef {
+      color: var(--interactive-hover);
+    }
+
+    // Icon within text
+    .iconContainer-21RCa3 { display: none }
+
+    // Text after icon
+    .overflow-1wOqNV {
+      margin-left: 2px ;
+    }
+
+    &:hover {
+      background: none var(--background-modifier-selected);
+
+      .returnButtonText-27U_ef {
+        color: var(--interactive-active);
+      }
+    }
+  }
+}
+// <- Special Channels
+
+
+// -> Channel & Roles
+
+// Content container
+.container-2IKOsH {
+
+  // Navbar
+  .tabBar-1_P75h {
+
+    .tabBarItem-onx_ng {
+      border: none !important;
+    }
+  }
+
+  // -> Customize
+  // Infos & Questions
+  .prompt-1sE27N {
+    background: none ;
+
+    .optionButtonWrapper-2lbogO {
+      background: var(--background-modifier-hover) ;
+      border: none ;
+
+      &:hover {
+        background: var(--background-modifier-selected) ;
+      }
+    }
+  }
+
+  // "MY Profile"
+  .profileCard-2gVmvm {
+    background: var(--background-modifier-hover);
+
+    .username-YfeGz8 {
+      color: var(--header-primary) !important;
+    }
+
+    div {
+      color: var(--header-secondary) !important;
+    }
+  }
+  // <- Customize
+
+  // -> Browse channels
+  // Searchbar
+  .search-kg4MrS {
+    background: var(--background-modifier-selected);
+    border-radius: 2px ;
+  }
+
+  // create channel btn
+  .createButton-2BBU0x {
+    border-radius: 2px ;
+
+    @include Btn(var(--background-modifier-selected));
+  }
+  
+  // Channel category
+  .categoryRow-2VIZ6m {
+    .categoryText-35ACGA {
+      color: var(--header-secondary) !important;
+    }
+  }
+
+  // channel item
+  .channelRow-4X_3fi {
+    background: none ;
+
+    &:not(.disabled-3cfocy):hover {
+      background: var(--background-modifier-hover) ;
+    }
+
+    .channelText-30KI3D {
+      color: var(--text-normal) !important;
+    }
+
+    .viewChannelButton-59XD70 {
+      display: block;
+
+      @include Btn();
+    }
+  }
+
+  // Checkboxes
+  .checkbox-1LuCGM {
+    background: none !important;
+    border-color: var(--interactive-normal) !important;
+  }
+  // <- Browse channels
+}
+// <- Channel & Roles
+
+// -> Server welcome screen thing
+.content-1SgpWY .main-243VC2 {
+  // Background image
+  .artwork-3uFrhF { display: none }
+
+  // -> Intro
+  .coverContainer-1sBM6d {
+    background: none ;
+  }
+
+  .centerContent-2Awr7N {
+    background: var(--background-tertiary);
+
+    .button-f2h6uQ {
+      @include Btn("background");
+    }
+  }
+  // <- Intro
+
+  // -> Main content
+  .promptContent-1KG8jv {
+
+    .optionButton-1W9f7G {
+      border: none ;
+      background: var(--background-modifier-accent);
+
+      &:hover {
+        background: var(--background-modifier-selected) ;
+      }
+    }
+  }
+  // <- Main content
+}
+// <- Server welcome screen thing
+
+// -> Member Safety Page
+.page-2dwf_i {
+
+  // scroller inner content container
+  .content-1jQy2l {
+    padding: 0 ;
+
+    // inner container
+    .mainTableContainer-3Nxvkd {
+      box-shadow: none ;
+    }
+  }
+
+  // -> Header
+  .searchBar-3S907z {
+    background: var(--background-modifier-selected);
+    border-bottom: 1px solid transparent ;
+
+    &:focus-within {
+      background: none ;
+      border-bottom-color: var(--interactive-normal);
+      border-radius: 0 ;
+    }
+  }
+  // <- Header
+
+  // -> Table
+  .table-2Z1caJ {
+    padding: 0 ;
+    border: none ;
+  }
+
+  .tableHeaderRow-2Jri1A::after {
+    box-shadow: none ;
+    background: var(--background-modifier-accent);
+  }
+
+  // notice bar for when new member joined 
+  .newMembersNotice-35VT6e {
+    top: -4px ;
+    background: var(--background-secondary-alt);
+    cursor: auto ;
+
+    @include shadow_effect("drop_2");
+
+    td {
+      &:first-child {
+        border-top-left-radius: 8px ;
+        border-bottom-left-radius: 8px ;
+      }
+      &:last-child {
+        border-top-right-radius: 8px ;
+        border-bottom-right-radius: 8px ;
+      }
+    }
+  }
+
+  td, th {
+    width: auto ; //idk
+  }
+
+  // Member item
+  .memberRowContainer-ZDlmmA {
+    // weird effect on row when leaving modal, idk
+    background: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+
+    // Row cells (idk, thats just how DC does it.)
+    td {
+      border-radius: 0 ;
+      background: none ;
+      padding: 8px 4px ;
+
+      &::after {
+        display: none ;
+      }
+    }
+    
+    &:hover {
+
+      // all inner items (table data cell)
+      td {
+        background: var(--background-modifier-hover);
+      }
+
+      // action buttons
+      .actionCell-1tWIj3 {
+        color: var(--interactive-normal);
+      }
+    }
+
+    .memberNameContainer-IOGroW {
+      // grid-template-columns: 32px minmax(100px, 150px);
+    }
+
+    // -> Roles cell
+    // container cell
+    td:has(.roleContainer-13c6D7) {
+      // width: 10% !important ;
+    }
+
+    .roleName-2ZJJYR {
+      max-width: 140px ;
+    }
+
+    // roles btns
+    .otherRoles-LMys1u {
+      opacity: 1;
+      background: var(--background-modifier-hover);
+    }
+
+    // role add btn
+    .addRoleContainer-2tqBaM {
+
+      // icon
+      .addRoleIcon-5oV6RN {
+        color: var(--header-secondary);
+      }
+
+      &:hover {
+        background: var(--background-modifier-selected);
+
+        .addRoleIcon-5oV6RN {
+          color: var(--header-primary);
+        }
+      }
+    }
+    // <- Roles cell
+
+    // action btns
+    .button-2XiUpU {
+      background: none ;
+
+      &:hover {
+        color: var(--interactive-hover);
+      }
+    }
+  }
+  // <- Table
+}
+// <- Member Safety Page
